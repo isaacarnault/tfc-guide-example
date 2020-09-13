@@ -22,17 +22,3 @@ resource "aws_dynamodb_table" "tfc_example_table" {
     type = "S"
   }
 }
-
-
-resource "tfe_policy_set" "global" {
-  name         = "global"
-  description  = "Policies that should be enforced on ALL infrastructure."
-  organization = "${var.tfe_organization}"
-  global       = true
-
-  policy_ids = [
-    "${tfe_sentinel_policy.passthrough.id}",
-    "${tfe_sentinel_policy.aws-block-allow-all-cidr.id}",
-  ]
-}
-
